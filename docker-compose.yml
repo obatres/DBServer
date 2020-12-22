@@ -1,0 +1,15 @@
+
+version: "3"
+services:
+    mongosrv:
+        image: "mongo"
+        ports:
+           - "5000:27017"
+    serverapi:
+        build: .
+        depends_on:
+            - mongosrv
+        ports:
+            - "5001:5001"
+        volumes:
+            - /proc/:/modulos/proc/
