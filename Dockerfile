@@ -26,7 +26,7 @@ RUN pip3 install -r requirements.txt
 
 RUN pip3 install flask-cors
 
-COPY ["ServerA.py", "/app"]
+COPY ["Server.py", "/app"]
 
 # Exposing an internal port
 EXPOSE 5001
@@ -37,4 +37,4 @@ EXPOSE 5001
 ENTRYPOINT [ "python3" ]
 
 # These commands will be replaced if user provides any command by himself
-CMD ["ServerA.py"]
+CMD ["Server.py"]

@@ -11,5 +11,3 @@ services:
             - mongosrv
         ports:
             - "5001:5001"
-        volumes:
-            - /proc/:/modulos/proc/
