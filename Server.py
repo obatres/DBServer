@@ -7,10 +7,11 @@ app = Flask(__name__)
 CORS(app)
 
 class MongoAPI:
-    def __init__(self, data):
+    def __init__(self, data ):
         self.client = MongoClient("mongodb://mongosrv:27017")  
 
         database = data['database']
+
         collection = data['collection']
         cursor = self.client[database]
         self.collection = cursor[collection]
@@ -60,6 +61,27 @@ def mongo_read():
     return Response(response=json.dumps(response),
                     status=200,
                     mimetype='application/json')
+
+
+
+@app.route('/verClientes', methods=['GET'])
+def mongo_verClientes():
+    data = {
+        "database": "ERP",    
+        "collection": "Clientes"
+        }
+
+    if data is None or data == {}:
+        return Response(response=json.dumps({"Error": "Please provide connection information"}),
+                        status=400,
+                        mimetype='application/json')
+    obj1 = MongoAPI(data)
+    response = obj1.read()
+    return Response(response=json.dumps(response),
+                    status=200,
+                    mimetype='application/json')
+
+
 
 @app.route('/mongodb', methods=['POST'])
 def mongo_write():
